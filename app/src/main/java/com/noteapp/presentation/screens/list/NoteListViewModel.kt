@@ -1,3 +1,7 @@
+/*
+ * ViewModel de la lista de notas. Observa los cambios en la base de datos mediante Flow,
+ * aplica búsqueda con debounce y permite ordenar y eliminar notas.
+ */
 package com.noteapp.presentation.screens.list
 
 import androidx.lifecycle.ViewModel
@@ -33,6 +37,7 @@ class NoteListViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(NoteListUiState(isLoading = true))
     val uiState: StateFlow<NoteListUiState> = _uiState.asStateFlow()
 
+    // Flow que emite la consulta de búsqueda con un retardo para evitar peticiones excesivas.
     private val searchQueryFlow = MutableStateFlow("")
 
     init {
@@ -41,6 +46,7 @@ class NoteListViewModel @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private fun observeNotes() {
+        // Cada vez que cambia la consulta (con debounce), se obtienen las notas correspondientes.
         searchQueryFlow
             .debounce(300)
             .flatMapLatest { query ->
@@ -86,16 +92,6 @@ class NoteListViewModel @Inject constructor(
                 _uiState.update { it.copy(recentlyDeletedNote = note) }
             } catch (e: Exception) {
                 _uiState.update { it.copy(errorMessage = "Error al eliminar la nota") }
-            }
-        }
-    }
-
-    fun restoreNote() {
-        viewModelScope.launch {
-            _uiState.value.recentlyDeletedNote?.let { note ->
-                // Re-insert with same timestamps; id=0 will auto-generate new id
-                // For true undo we'd need insertNoteUseCase here
-                _uiState.update { it.copy(recentlyDeletedNote = null) }
             }
         }
     }

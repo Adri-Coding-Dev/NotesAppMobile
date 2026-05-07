@@ -1,3 +1,9 @@
+/*
+ * Interfaz DAO de Room que define las operaciones sobre la tabla "notes".
+ * Incluye consultas para obtener todas las notas (observable con Flow), buscar por texto,
+ * insertar, actualizar y eliminar. Las operaciones que devuelven Flow permiten
+ * actualizaciones reactivas de la UI.
+ */
 package com.noteapp.data.local.dao
 
 import androidx.room.*

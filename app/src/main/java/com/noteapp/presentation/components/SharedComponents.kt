@@ -1,3 +1,8 @@
+/*
+ * Conjunto de componentes visuales compartidos: barra superior, FAB animado, diálogos,
+ * divisores, chips, placeholders, etc. Cada uno encapsula un pequeño comportamiento visual
+ * reutilizable en varias pantallas.
+ */
 package com.noteapp.presentation.components
 
 import androidx.compose.animation.*
@@ -22,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.noteapp.presentation.theme.*
 
+// Barra superior reutilizable.
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoteTopBar(
@@ -50,6 +56,7 @@ fun NoteTopBar(
     )
 }
 
+// Botón flotante principal con animación de presión.
 @Composable
 fun PrimaryFab(
     onClick: () -> Unit,
@@ -78,6 +85,7 @@ fun PrimaryFab(
     }
 }
 
+// Overlay de carga.
 @Composable
 fun LoadingOverlay() {
     Box(
@@ -94,6 +102,7 @@ fun LoadingOverlay() {
     }
 }
 
+// Snackbar personalizado para errores.
 @Composable
 fun ErrorSnackbar(
     message: String,
@@ -114,6 +123,7 @@ fun ErrorSnackbar(
     }
 }
 
+// Divisor con gradiente.
 @Composable
 fun GradientDivider(modifier: Modifier = Modifier) {
     Box(
@@ -133,6 +143,7 @@ fun GradientDivider(modifier: Modifier = Modifier) {
     )
 }
 
+// Pequeña etiqueta tipo chip.
 @Composable
 fun ChipLabel(
     text: String,
@@ -155,6 +166,7 @@ fun ChipLabel(
     }
 }
 
+// Diálogo de confirmación para eliminar una nota.
 @Composable
 fun DeleteConfirmDialog(
     onConfirm: () -> Unit,
@@ -198,6 +210,7 @@ fun DeleteConfirmDialog(
     )
 }
 
+// Placeholder mostrado cuando no hay notas, con una animación de pulso.
 @Composable
 fun EmptyNotesPlaceholder(modifier: Modifier = Modifier) {
     Column(

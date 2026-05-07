@@ -1,3 +1,8 @@
+/*
+ * Casos de uso que envuelven las operaciones del repositorio. Cada uno representa una
+ * acción única y se inyecta donde se necesite. Facilitan el testeo y la separación de
+ * responsabilidades.
+ */
 package com.noteapp.domain.usecase
 
 import com.noteapp.domain.model.Note
@@ -32,6 +37,7 @@ class UpdateNoteUseCase @Inject constructor(
 class DeleteNoteUseCase @Inject constructor(
     private val repository: NoteRepository
 ) {
+    // Permite borrar pasando directamente la nota o el id.
     suspend operator fun invoke(note: Note) = repository.deleteNote(note)
     suspend operator fun invoke(id: Int) = repository.deleteNoteById(id)
 }

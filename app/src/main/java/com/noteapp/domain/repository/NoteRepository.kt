@@ -1,3 +1,7 @@
+/*
+ * Interfaz del repositorio de notas en el dominio. Define las operaciones que se pueden
+ * realizar sobre las notas sin depender de la fuente de datos concreta.
+ */
 package com.noteapp.domain.repository
 
 import com.noteapp.domain.model.Note

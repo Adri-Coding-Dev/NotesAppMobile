@@ -1,3 +1,8 @@
+/*
+ * Pantalla de edición/creación de notas. Utiliza un BasicTextField para el título y otro
+ * para el contenido enriquecido, junto con una barra de herramientas que permite aplicar
+ * subrayado al texto seleccionado. Convierte entre AnnotatedString y HTML para guardar.
+ */
 package com.noteapp.presentation.screens.edit
 
 import androidx.compose.animation.*
@@ -48,12 +53,12 @@ fun NoteEditScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     val contentFocusRequester = remember { FocusRequester() }
 
-    // TextFieldValue tracks both text+spans AND cursor/selection
+    // Estado local del campo de contenido para manejar selección y texto enriquecido.
     var contentFieldValue by remember {
         mutableStateOf(TextFieldValue(annotatedString = AnnotatedString("")))
     }
 
-    // Sync field value when note loads
+    // Sincroniza el contenido del campo con el ViewModel cuando la nota se carga.
     LaunchedEffect(uiState.contentAnnotated) {
         val current = contentFieldValue.annotatedString
         if (current.text != uiState.contentAnnotated.text ||
@@ -100,13 +105,13 @@ fun NoteEditScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Rich text toolbar
+            // Barra de herramientas de formato (subrayado).
             RichTextToolbar(
                 hasSelection = hasSelection,
                 isUnderlined = uiState.isSelectionUnderlined,
                 onUnderlineClick = {
                     viewModel.toggleUnderline()
-                    // Re-sync field value after toggle
+                    // Refleja el cambio en el campo local.
                     contentFieldValue = contentFieldValue.copy(
                         annotatedString = viewModel.uiState.value.contentAnnotated
                     )
@@ -119,7 +124,7 @@ fun NoteEditScreen(
                     .verticalScroll(rememberScrollState())
                     .padding(horizontal = 20.dp, vertical = 8.dp)
             ) {
-                // Title field
+                // Campo del título.
                 BasicTextField(
                     value = uiState.title,
                     onValueChange = viewModel::onTitleChange,
@@ -153,11 +158,12 @@ fun NoteEditScreen(
                 GradientDivider()
                 Spacer(Modifier.height(16.dp))
 
-                // Rich text content field
+                // Campo del contenido enriquecido.
                 BasicTextField(
                     value = contentFieldValue,
                     onValueChange = { newValue ->
                         contentFieldValue = newValue
+                        // Actualiza el estado del ViewModel con el texto y la selección.
                         viewModel.onContentChange(newValue.annotatedString)
                         val sel = newValue.selection
                         viewModel.onSelectionChange(sel.start, sel.end)
@@ -195,6 +201,7 @@ fun NoteEditScreen(
     }
 }
 
+// Barra superior con botón de guardar animado.
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun EditTopBar(
@@ -228,6 +235,7 @@ private fun EditTopBar(
     }
 }
 
+// Botón de guardar con indicador de carga.
 @Composable
 private fun SaveButton(isSaving: Boolean, onClick: () -> Unit) {
     val scale by animateFloatAsState(
@@ -266,6 +274,7 @@ private fun SaveButton(isSaving: Boolean, onClick: () -> Unit) {
     }
 }
 
+// Barra de herramientas de formato con botón de subrayado.
 @Composable
 private fun RichTextToolbar(
     hasSelection: Boolean,
@@ -280,7 +289,6 @@ private fun RichTextToolbar(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        // Label
         Text(
             text = "FORMATO",
             color = OnSurfaceSubtle,
@@ -290,7 +298,6 @@ private fun RichTextToolbar(
             modifier = Modifier.padding(end = 8.dp)
         )
 
-        // Underline toggle button
         FormatButton(
             label = "U",
             active = isUnderlined && hasSelection,
@@ -302,7 +309,6 @@ private fun RichTextToolbar(
 
         Spacer(Modifier.weight(1f))
 
-        // Selection hint
         AnimatedVisibility(
             visible = !hasSelection,
             enter = fadeIn(),
@@ -329,6 +335,7 @@ private fun RichTextToolbar(
     }
 }
 
+// Botón de formato individual (subrayado) con animaciones de color y borde.
 @Composable
 private fun FormatButton(
     label: String,

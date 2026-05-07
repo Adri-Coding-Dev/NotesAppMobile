@@ -1,3 +1,8 @@
+/*
+ * Definición de la base de datos Room. Declara la entidad NoteEntity y expone el DAO
+ * necesario para acceder a la tabla "notes". Se utiliza un companion object para
+ * centralizar el nombre de la base de datos.
+ */
 package com.noteapp.data.local
 
 import androidx.room.Database
@@ -11,6 +16,7 @@ import com.noteapp.data.local.entity.NoteEntity
     exportSchema = false
 )
 abstract class NoteDatabase : RoomDatabase() {
+    // Método abstracto que Room implementa para proporcionar el DAO.
     abstract fun noteDao(): NoteDao
 
     companion object {

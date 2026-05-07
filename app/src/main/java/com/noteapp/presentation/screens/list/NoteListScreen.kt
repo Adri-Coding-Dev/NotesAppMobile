@@ -1,3 +1,7 @@
+/*
+ * Pantalla principal que muestra la lista de notas. Incluye búsqueda, ordenación y FAB
+ * para crear nueva nota. Utiliza un LazyColumn con animaciones en los elementos.
+ */
 package com.noteapp.presentation.screens.list
 
 import androidx.compose.animation.*
@@ -137,6 +141,7 @@ fun NoteListScreen(
     }
 }
 
+// Barra superior con campo de búsqueda expandible y menú de ordenación.
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun NoteListTopBar(
@@ -216,6 +221,7 @@ private fun NoteListTopBar(
     }
 }
 
+// Menú desplegable para cambiar el criterio de ordenación.
 @Composable
 private fun SortDropdownMenu(
     expanded: Boolean,
@@ -252,6 +258,7 @@ private fun SortDropdownMenu(
     }
 }
 
+// Tarjeta individual de nota con acento de color y vista previa del contenido.
 @Composable
 fun NoteCard(
     note: Note,
@@ -262,7 +269,7 @@ fun NoteCard(
     var showDeleteDialog by remember { mutableStateOf(false) }
     val preview = RichTextUtils.stripHtml(note.content).take(120)
 
-    // Color accent based on id for visual variety
+    // Acento de color basado en el id para variedad visual.
     val accentColor = remember(note.id) {
         listOf(AccentPrimary, AccentSecondary, AccentWarning, Pink80.copy(alpha = 0.8f))
             .getOrElse(note.id % 4) { AccentPrimary }
@@ -277,7 +284,7 @@ fun NoteCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
-            // Top accent bar
+            // Barra superior de acento.
             Box(
                 modifier = Modifier
                     .fillMaxWidth()

@@ -1,3 +1,8 @@
+/*
+ * Implementación del repositorio que hace de puente entre los casos de uso y la
+ * fuente de datos local (Room). Convierte las entidades NoteEntity al modelo de dominio
+ * Note y viceversa usando funciones de mapeo privadas.
+ */
 package com.noteapp.data.repository
 
 import com.noteapp.data.local.dao.NoteDao
@@ -35,7 +40,7 @@ class NoteRepositoryImpl @Inject constructor(
     override suspend fun deleteNoteById(id: Int) =
         noteDao.deleteNoteById(id)
 
-    // Mappers
+    // Mapeo de entidad a modelo de dominio.
     private fun NoteEntity.toDomain() = Note(
         id = id,
         title = title,
@@ -44,6 +49,7 @@ class NoteRepositoryImpl @Inject constructor(
         updatedAt = updatedAt
     )
 
+    // Mapeo de modelo de dominio a entidad.
     private fun Note.toEntity() = NoteEntity(
         id = id,
         title = title,

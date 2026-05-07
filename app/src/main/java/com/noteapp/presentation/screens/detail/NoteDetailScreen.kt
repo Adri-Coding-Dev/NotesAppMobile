@@ -1,3 +1,8 @@
+/*
+ * Pantalla que muestra el detalle de una nota. Carga la nota desde el ViewModel, convierte el
+ * contenido HTML a texto enriquecido con AnnotatedString y lo presenta. Incluye botones para
+ * editar y eliminar, así como un diálogo de confirmación de borrado.
+ */
 package com.noteapp.presentation.screens.detail
 
 import androidx.compose.animation.*
@@ -105,6 +110,7 @@ fun NoteDetailScreen(
                 }
                 else -> {
                     val note = uiState.note!!
+                    // Convierte el HTML a una cadena enriquecida para mostrar subrayados.
                     val annotatedContent = remember(note.content) {
                         RichTextUtils.htmlToAnnotatedString(note.content)
                     }
@@ -115,7 +121,7 @@ fun NoteDetailScreen(
                             .verticalScroll(rememberScrollState())
                             .padding(horizontal = 20.dp, vertical = 8.dp)
                     ) {
-                        // Title section
+                        // Título
                         Text(
                             text = note.title.ifBlank { "Sin título" },
                             style = MaterialTheme.typography.headlineMedium.copy(
@@ -127,7 +133,7 @@ fun NoteDetailScreen(
 
                         Spacer(Modifier.height(12.dp))
 
-                        // Meta info row
+                        // Fechas de creación y edición.
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -149,7 +155,7 @@ fun NoteDetailScreen(
                         GradientDivider()
                         Spacer(Modifier.height(24.dp))
 
-                        // Rich text content
+                        // Contenido enriquecido.
                         Text(
                             text = annotatedContent,
                             style = MaterialTheme.typography.bodyLarge.copy(
@@ -176,6 +182,7 @@ fun NoteDetailScreen(
     }
 }
 
+// Componente privado para mostrar una pequeña etiqueta de metadato.
 @Composable
 private fun DetailMetaChip(
     label: String,

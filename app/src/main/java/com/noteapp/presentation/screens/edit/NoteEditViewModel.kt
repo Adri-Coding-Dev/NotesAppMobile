@@ -1,3 +1,8 @@
+/*
+ * ViewModel de la pantalla de edición. Gestiona la carga de una nota existente (si se está
+ * editando), las modificaciones del título y el contenido enriquecido, y el guardado en la
+ * base de datos. Utiliza RichTextUtils para convertir entre AnnotatedString y HTML.
+ */
 package com.noteapp.presentation.screens.edit
 
 import androidx.compose.ui.text.AnnotatedString
@@ -40,6 +45,7 @@ class NoteEditViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(NoteEditUiState())
     val uiState: StateFlow<NoteEditUiState> = _uiState.asStateFlow()
 
+    // Carga una nota existente si se proporciona un id; si no, permanece en modo creación.
     fun loadNote(id: Int?) {
         if (id == null) {
             _uiState.update { it.copy(isEditing = false) }
@@ -72,6 +78,7 @@ class NoteEditViewModel @Inject constructor(
         _uiState.update { it.copy(title = title) }
     }
 
+    // Actualiza el contenido enriquecido y comprueba si la selección está subrayada.
     fun onContentChange(annotated: AnnotatedString) {
         _uiState.update { state ->
             val isUnderlined = if (state.selectionStart < state.selectionEnd) {
@@ -90,6 +97,7 @@ class NoteEditViewModel @Inject constructor(
         }
     }
 
+    // Conmuta el subrayado en la selección actual.
     fun toggleUnderline() {
         _uiState.update { state ->
             val start = state.selectionStart
@@ -108,6 +116,7 @@ class NoteEditViewModel @Inject constructor(
         }
     }
 
+    // Guarda la nota (nueva o actualizada) en la base de datos.
     fun saveNote() {
         val state = _uiState.value
         if (state.title.isBlank() && state.contentAnnotated.text.isBlank()) {
@@ -127,7 +136,7 @@ class NoteEditViewModel @Inject constructor(
                             id = state.noteId,
                             title = state.title.ifBlank { "Sin título" },
                             content = htmlContent,
-                            createdAt = now, // ideally preserve original; simplified here
+                            createdAt = now, // simplificado: sobrescribe la fecha original
                             updatedAt = now
                         )
                     )

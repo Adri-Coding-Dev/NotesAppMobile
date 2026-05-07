@@ -1,3 +1,7 @@
+/*
+ * ViewModel de la pantalla de detalle. Carga una nota por id y permite eliminarla.
+ * Expone un StateFlow con el estado de la UI, incluyendo indicadores de carga y errores.
+ */
 package com.noteapp.presentation.screens.detail
 
 import androidx.lifecycle.ViewModel
@@ -29,6 +33,7 @@ class NoteDetailViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(NoteDetailUiState())
     val uiState: StateFlow<NoteDetailUiState> = _uiState.asStateFlow()
 
+    // Carga la nota desde el repositorio usando el caso de uso.
     fun loadNote(id: Int) {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
@@ -41,6 +46,7 @@ class NoteDetailViewModel @Inject constructor(
         }
     }
 
+    // Elimina la nota actual y marca el estado como eliminado para que la UI navegue hacia atrás.
     fun deleteNote() {
         viewModelScope.launch {
             _uiState.value.note?.let { note ->

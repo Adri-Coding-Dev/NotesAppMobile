@@ -1,3 +1,8 @@
+/*
+ * Módulo de Dagger Hilt que provee la base de datos Room y el DAO de notas.
+ * Se instala en el componente SingletonComponent para que estén disponibles en toda la app
+ * con ámbito de singleton.
+ */
 package com.noteapp.di
 
 import android.content.Context

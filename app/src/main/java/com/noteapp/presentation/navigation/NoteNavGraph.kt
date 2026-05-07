@@ -1,3 +1,8 @@
+/*
+ * Grafo de navegación de la aplicación. Define tres pantallas (lista, detalle, edición)
+ * usando Jetpack Compose Navigation. Cada ruta recibe los argumentos necesarios
+ * y aplica transiciones animadas entre pantallas.
+ */
 package com.noteapp.presentation.navigation
 
 import androidx.compose.animation.*
@@ -13,6 +18,7 @@ import com.noteapp.presentation.screens.detail.NoteDetailScreen
 import com.noteapp.presentation.screens.edit.NoteEditScreen
 import com.noteapp.presentation.screens.list.NoteListScreen
 
+// Clase sellada que define las rutas.
 sealed class Screen(val route: String) {
     object NoteList : Screen("note_list")
     object NoteDetail : Screen("note_detail/{noteId}") {
@@ -33,6 +39,7 @@ fun NoteNavGraph(
         navController = navController,
         startDestination = Screen.NoteList.route
     ) {
+        // Pantalla de lista de notas.
         composable(
             route = Screen.NoteList.route,
             enterTransition = { fadeIn(animationSpec = tween(300)) },
@@ -48,6 +55,7 @@ fun NoteNavGraph(
             )
         }
 
+        // Pantalla de detalle, recibe el id de la nota.
         composable(
             route = Screen.NoteDetail.route,
             arguments = listOf(navArgument("noteId") { type = NavType.IntType }),
@@ -68,6 +76,7 @@ fun NoteNavGraph(
             )
         }
 
+        // Pantalla de edición/creación, con un argumento opcional noteId.
         composable(
             route = Screen.NoteEdit.route,
             arguments = listOf(

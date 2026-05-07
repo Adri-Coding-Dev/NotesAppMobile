@@ -1,3 +1,6 @@
+/*
+ * Configuración del tema Material 3 utilizando el esquema de color oscuro personalizado.
+ */
 package com.noteapp.presentation.theme
 
 import androidx.compose.material3.MaterialTheme

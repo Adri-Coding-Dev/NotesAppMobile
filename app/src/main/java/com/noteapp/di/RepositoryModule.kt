@@ -1,3 +1,8 @@
+/*
+ * Módulo Hilt que enlaza la interfaz NoteRepository con su implementación concreta.
+ * Al ser abstracto y usar @Binds, Hilt sabe qué implementación inyectar cuando se solicite
+ * el repositorio.
+ */
 package com.noteapp.di
 
 import com.noteapp.data.repository.NoteRepositoryImpl
