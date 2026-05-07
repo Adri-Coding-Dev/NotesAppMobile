@@ -131,22 +131,6 @@ com.noteapp/
 
 ---
 
-## 📸 Capturas de pantalla
-
-Todas las imágenes se encuentran en la carpeta `docs/`:
-
-| Archivo                      | Descripción                                |
-|------------------------------|--------------------------------------------|
-| `docs/screenshot_list.png`   | Lista principal con notas de ejemplo       |
-| `docs/screenshot_search.png` | Búsqueda activa filtrando notas            |
-| `docs/screenshot_edit.png`   | Editor con texto y barra de formato        |
-| `docs/screenshot_detail.png` | Vista detalle con contenido subrayado      |
-| `docs/screenshot_delete.png` | Diálogo de confirmación para eliminar nota |
-
-> **Nota:** Reemplaza estas imágenes por capturas reales de la aplicación en funcionamiento.
-
----
-
 ## 🚀 Posibles mejoras futuras
 
 - [ ] Soporte para **negrita**, *cursiva* y otros formatos.
