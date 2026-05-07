@@ -6,14 +6,14 @@
 
 ## ✨ Funcionalidades
 
-<img src="docs/SinNotas.jpeg" alt="Sin Notas" width="500">
+<img src="docs/SinNotas.jpeg" alt="Sin Notas" width="300">
 
 ### 1. Lista de notas con búsqueda y ordenación
 - Visualiza todas tus notas en una lista con **vista previa del contenido** y **fecha de modificación**.
 - **Búsqueda instantánea** por título o contenido, con un campo expandible en la barra superior.
 - Opciones de **ordenación**: más recientes, más antiguas o por título (A-Z).
 
-<img src="docs/ListaNotas.jpeg" alt="Lista de notas" width="500">
+<img src="docs/ListaNotas.jpeg" alt="Lista de notas" width="300">
 
 ### 2. Crear y editar notas con texto enriquecido
 - Editor con campos separados para **título** y **contenido**.
@@ -21,7 +21,7 @@
 - Barra de herramientas de formato que se activa al seleccionar texto, mostrando el estado actual del subrayado.
 - Interfaz limpia y enfocada en la escritura, con placeholders y divisores visuales.
 
-<img src="docs/NuevaNota.jpeg" alt="Editor de nota" width="500">
+<img src="docs/NuevaNota.jpeg" alt="Editor de nota" width="300">
 
 ### 3. Detalle de nota y eliminacion con confirmacion
 - Visualización completa de la nota con el título, fechas de creación y edición, y el contenido enriquecido renderizado con los subrayados aplicados.
@@ -29,16 +29,16 @@
 - Cada nota en la lista tiene un botón de eliminar con un **diálogo de confirmación** para evitar borrados accidentales.
 - La eliminación desde el detalle también muestra el mismo diálogo de seguridad.
 
-<img src="docs/EliminarNota.jpeg" alt="Confirmacion de eliminacion" width="500">
+<img src="docs/EliminarNota.jpeg" alt="Confirmacion de eliminacion" width="300">
 
 ### 5. Búsqueda y ordenación inteligentes
 - Búsqueda con **debounce** de 300ms para no saturar la base de datos mientras escribes.
 - El menú de ordenación muestra la opción activa con un icono de verificación.
 - Al limpiar la búsqueda, se recupera automáticamente la lista completa.
 
-<img src="docs/BusquedaNota.jpeg" alt="Busqueda de notas" width="500">
+<img src="docs/BusquedaNota.jpeg" alt="Busqueda de notas" width="300">
 
-<img src="docs/OrdenacionNotas.jpeg" alt="Ordenacion de notas" width="500">
+<img src="docs/OrdenacionNotas.jpeg" alt="Ordenacion de notas" width="300">
 
 ### 6. Animaciones y experiencia de usuario
 - Transiciones animadas entre pantallas (deslizamiento lateral y vertical).
